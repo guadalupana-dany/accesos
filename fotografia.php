@@ -59,21 +59,44 @@
                             <div class="modal-body">
                                 <h6>Nombre: {{ nombre }}</h6>
                                 <h6>Derecho : {{ derecho }}</h6>
-                                <div v-if="derecho == 'VERDE'">
-                                
+                             <!--   <div v-if="derecho == 'VERDE'">
+
                                     <h6>Numero:</h6>
-                                    <input type="number" class="form-control">
-                                
+                                    <input type="number" class="form-control" v-model="numero">
+
                                 </div>
                                 <h6>Subir Foto</h6>
-                                <input type="file" v-model="foto">
+                                <input type="file" name="image" id="image" @change="getImage" accept="image/*">
+                                <img :src="foto" style="width:100px;height:100px" class="img-circle"  alt="">
+                            -->
+                            <form action="controller/foto.php" method="post" enctype="multipart/form-data">
+                                
+                             <!--   <div v-if="derecho == 'VERDE'">
 
-                                <img src="foto" alt="">
-                        
-                            </div>
+                                    <h6>Numero:</h6>
+                                    <input type="number" class="form-control" v-model="numero">
+
+                                </div>
+                                <h6>Subir Foto</h6>
+                                <input type="file" name="image" id="image">                               
+                                <img :src="foto" style="width:100px;height:100px" class="img-circle"  alt=""> -->
+                                <div v-if="derecho == 'VERDE'">
+
+                                    <h6>Numero:</h6>
+                                    <input type="number" name="numero" class="form-control" v-model="numero" :value="numero">
+
+                                </div>
+                                <input type="hidden" name="id" :value="id_socio">
+                                <br>
+                                <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+                                <br>
+                                <input type="submit" class="btn btn-primary" value="Siguiente" name="submit">
+                               
+                            </form>
+                                                        </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"  @click="cerrarModal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" @click="siguiente(id_socio)">Siguiente</button>
+                              <!--  <button type="button" class="btn btn-primary" @click="siguiente(id_socio)">Siguiente</button> -->
                             </div>
                             </div>
                         </div>

@@ -31,15 +31,37 @@ var app = new Vue({
                    app.id_socio = app.asociado[0].id;
                    app.derecho =  app.asociado[0].derecho;
             });
+            this.foto = '';
         },
         cerrarModal(){
             console.log("cerrando")
             this.id_asociado = 0;
+            this.foto = '';
         },
         siguiente(id){
-            console.log("siguiente ------->"+id)
+            var image2 = document.getElementById('image').files[0];
+           
             $("#exampleModal").modal('hide');
+            let url = 'controller/foto.php';
+           // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+            axios.post(url,{
+                foto : image2,
+                numero : app.numero,
+                id : id
+            }).then(response => {                    
+              console.log(response.data)
+            });
         },
+        getImage(e){
+            
+            let image = e.target.files[0];
+            let reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onload = e => {
+                this.foto = e.target.result;
+            }
+            this.loaded = true;
+        }
 
     },
     mounted() {

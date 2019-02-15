@@ -119,7 +119,35 @@
          exit;
     }
 
+     //muestra los datos y la foto referente al numero ingresado
+     if(isset($_GET['numero'])){
+        $numero = $_GET['numero'];
+        
+        $test = "SELECT a.id,a.cif,a.nombre,a.foto,a.areaFinanciera FROM opinion as o inner join asociado as a on a.id = o.id_asociado where o.estado = 1  ";    
+         
+        $query = mysqli_query($mysqli,$test);
 
-    
+        $response = array();
+        while($row = mysqli_fetch_assoc($query)){
+            $response[] = $row;
+         }
+         echo json_encode($response);
+         exit;
+    }
+
+    //busca al asociado que va a opinar
+    if(isset($_GET['opinion'])){
+        $opinion = $_GET['opinion'];
+
+        $test1 = "update opinion as o inner join asociado as a on a.id = o.id_asociado set o.estado = 2 where o.estado = 1 ";      
+        mysqli_query($mysqli,$test1);
+
+        $test = "update opinion as o inner join asociado as a on a.id = o.id_asociado set o.estado = 1 where a.numero = ".$opinion;      
+        mysqli_query($mysqli,$test);
+
+        $insert = "insert into auditoria_opinion (numero_asociado) values ('".$opinion."')";
+        mysqli_query($mysqli,$insert);
+
+    }
 
 ?>

@@ -50,14 +50,7 @@ var app = new Vue({
 
             let url = 'controller/search.php?id=' + id;
             axios.get(url).then(response => {
-                    
-                    if(response.data.error == "NO"){
-                        console.log("vaciar")
-                        app.asociado = [];
-
-                    }else{
-                        alert("Algo salio mal")
-                    }
+                   app.asociado = [];
             });
         },
     },
