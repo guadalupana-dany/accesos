@@ -43,22 +43,22 @@ if ($uploadOk == 0) {
         echo "id = " . $_POST['id'];
         echo "numero = " . $_POST['numero'];*/
         $id = $_POST['id'];
-        $numero = '';
         $fotoName = basename( $_FILES["fileToUpload"]["name"]);
 
-        if(isset($_POST['numero']));{
-            $numero = $_POST['numero'];
-        }
+       
 
         //pasa al estado dos porque ya fue tomada la foto
-        $test = "UPDATE asociado SET estado = 2, numero= '". $numero."',foto = '". $fotoName ."'  where id = ". $id;
+        $test = "UPDATE asociado SET estado = 2,foto = '". $fotoName ."'  where id = ". $id;
         mysqli_query($mysqli,$test);
 
-        if($numero != ''){
+        $insert = "insert into firma (asociado_id) values (".$id.")";
+        mysqli_query($mysqli,$insert);
+
+       /*    if($numero != ''){
             $insert = "insert into opinion (id_asociado) values (".$id.")";
             mysqli_query($mysqli,$insert);
-        }
-        header('Location: http://localhost/ControlAcceso/fotografia.php');
+        }*/
+        header('Location: http://10.60.81.32:81/accesos1/accesos/fotografia.php');
     } else {
         echo "ERROR FALTAL.";
     }

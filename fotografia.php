@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css">
     <title>FOTOGRAFIA</title>
     
@@ -59,33 +59,8 @@
                             <div class="modal-body">
                                 <h6>Nombre: {{ nombre }}</h6>
                                 <h6>Derecho : {{ derecho }}</h6>
-                             <!--   <div v-if="derecho == 'VERDE'">
-
-                                    <h6>Numero:</h6>
-                                    <input type="number" class="form-control" v-model="numero">
-
-                                </div>
-                                <h6>Subir Foto</h6>
-                                <input type="file" name="image" id="image" @change="getImage" accept="image/*">
-                                <img :src="foto" style="width:100px;height:100px" class="img-circle"  alt="">
-                            -->
-                            <form action="controller/foto.php" method="post" enctype="multipart/form-data">
+                            <form action="controller/foto.php" method="post" enctype="multipart/form-data">                                
                                 
-                             <!--   <div v-if="derecho == 'VERDE'">
-
-                                    <h6>Numero:</h6>
-                                    <input type="number" class="form-control" v-model="numero">
-
-                                </div>
-                                <h6>Subir Foto</h6>
-                                <input type="file" name="image" id="image">                               
-                                <img :src="foto" style="width:100px;height:100px" class="img-circle"  alt=""> -->
-                                <div v-if="derecho == 'VERDE'">
-
-                                    <h6>Numero:</h6>
-                                    <input type="number" name="numero" class="form-control" v-model="numero" :value="numero">
-
-                                </div>
                                 <input type="hidden" name="id" :value="id_socio">
                                 <br>
                                 <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
@@ -96,7 +71,6 @@
                                                         </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"  @click="cerrarModal">Cerrar</button>
-                              <!--  <button type="button" class="btn btn-primary" @click="siguiente(id_socio)">Siguiente</button> -->
                             </div>
                             </div>
                         </div>

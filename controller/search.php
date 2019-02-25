@@ -122,9 +122,10 @@
      //muestra los datos y la foto referente al numero ingresado
      if(isset($_GET['numero'])){
         $numero = $_GET['numero'];
+       
         
-        $test = "SELECT a.id,a.cif,a.nombre,a.foto,a.areaFinanciera FROM opinion as o inner join asociado as a on a.id = o.id_asociado where o.estado = 1  ";    
-         
+       $test = "SELECT a.id,a.cif,a.nombre,a.foto,a.areaFinanciera FROM opinion as o inner join asociado as a on a.id = o.id_asociado where o.estado = 1  ";    
+       
         $query = mysqli_query($mysqli,$test);
 
         $response = array();
@@ -148,6 +149,81 @@
         $insert = "insert into auditoria_opinion (numero_asociado) values ('".$opinion."')";
         mysqli_query($mysqli,$insert);
 
+    }
+
+
+    //muestra los datos para el asociado en para firmar
+    if(isset($_GET['mostrandoFirmas'])){
+        $id = $_GET['mostrandoFirmas'];
+        
+        $test = "SELECT a.id,a.cif,a.nombre,a.areaFinanciera,ed.nombre as derecho,ei.nombre motivo 
+         FROM asociado as a inner join estado_derecho as ed on ed.id = a.id_estado_derecho 
+         inner join estado_ingreso as ei on ei.id = a.id_estado_ingreso where a.estado = 2"; 
+            
+        $query = mysqli_query($mysqli,$test);
+        
+        $response = array();
+        while($row = mysqli_fetch_assoc($query)){
+            $response[] = $row;
+         }         
+         echo json_encode($response);
+         exit;
+    }
+
+    //muestra los datos para el asociado en para firmar
+    if(isset($_GET['firma'])){
+
+        $test = "SELECT * from firma where estado = 0"; 
+            
+        $query = mysqli_query($mysqli,$test);
+        
+        $response = array();
+        while($row = mysqli_fetch_assoc($query)){
+            $response[] = $row;
+         }         
+         echo json_encode($response);
+         exit;
+    }
+
+
+    //hace el ingreso final de los asociados
+    /*if(isset($_GET['ingresoFinal'])){
+        $id = $_GET['ingresoFinal'];
+        $numero = $_GET['numero'];
+
+        $test = "UPDATE asociado SET estado = 3,numero = '".$numero."' where id = ". $id;
+        echo $test;
+       /*  mysqli_query($mysqli,$test);
+        
+        $response = array(
+            "error" => "NO",
+            "test" => $test
+        
+        );
+      
+         echo json_encode($response);
+         exit;*/
+    //}
+    if(isset($_GET['ingresoFinal'])){
+        $id = $_GET['ingresoFinal'];
+        $numero =  $_GET['newNu'];
+
+        $test = "UPDATE asociado SET estado = 3,numero = '".$numero."' where id = ". $id;
+        if($numero != ''){
+            $insert = "insert into opinion (id_asociado) values (".$id.")";
+            mysqli_query($mysqli,$insert);
+        }
+        
+         mysqli_query($mysqli,$test);
+        
+        $response = array(
+            "error" => "NO",
+            "test" => $test
+        
+        );
+      
+         echo json_encode($response);
+         exit;
     }
 
 ?>

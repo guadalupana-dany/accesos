@@ -3,11 +3,12 @@ var app = new Vue({
     el: '#app',
     data: {
         asociado: [],
-        cif : '',
-        nombre : '',
-        buscarpor : 1,
-        messageBuscar : '',
-        alertnoasociado : 0,
+        cif: '',
+        nombre: '',
+        buscarpor: 1,
+        messageBuscar: '',
+        alertnoasociado: 0,
+        derecho: '',
     },
     //alertaasociado 1 = no esta , 0 = entra , 2 = no estra ir a informacion
     methods: {
@@ -15,20 +16,20 @@ var app = new Vue({
             this.alertnoasociado = 0;
             let url = 'controller/search.php?';
             //buscar por cif
-            if(this.buscarpor == 1){
-                if(!this.cif.length){
+            if (this.buscarpor == 1) {
+                if (!this.cif.length) {
                     this.messageBuscar = 'DEBE DE INGRESAR NUMERO DE CIF';
                     return;
                 }
-                url += 'cif='+this.cif;
+                url += 'cif=' + this.cif;
             }
             //buscara por nombre
-            if(this.buscarpor == 2){
-                if(!this.nombre.length){
+            if (this.buscarpor == 2) {
+                if (!this.nombre.length) {
                     this.messageBuscar = 'DEBE DE INGRESAR NOMBRE';
                     return;
                 }
-                url += 'nombre='+this.nombre.toLowerCase();
+                url += 'nombre=' + this.nombre.toLowerCase();
             }
             //limpia los datos
             this.messageBuscar = '';
@@ -36,11 +37,11 @@ var app = new Vue({
             this.nombre = '';
             this.cif = '';
 
-             axios.get(url).then(response => {
+            axios.get(url).then(response => {
                 app.asociado = response.data;
-                if(app.asociado.length){
+                if (app.asociado.length) {
 
-                }else{
+                } else {
                     //si el asociado no exite
                     app.alertnoasociado = 1;
                 }
@@ -50,7 +51,7 @@ var app = new Vue({
 
             let url = 'controller/search.php?id=' + id;
             axios.get(url).then(response => {
-                   app.asociado = [];
+                app.asociado = [];
             });
         },
     },

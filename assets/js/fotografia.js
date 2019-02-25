@@ -2,58 +2,56 @@ var app = new Vue({
 
     el: '#app',
     data: {
-        asociados : [],
-        
-        id_asociado : 0,
+        asociados: [],
+
+        id_asociado: 0,
 
         //datos del asociado
-        asociado : [],
-        nombre : '',
-        id_socio : 0,
-        derecho : '',
-        foto : '',
-        numero : '',
+        asociado: [],
+        nombre: '',
+        id_socio: 0,
+        derecho: '',
+        foto: ''
     },
-    
+
     methods: {
-        getAsociados(){
+        getAsociados() {
             let url = 'controller/search.php?mostrando=listo';
-            axios.get(url).then(response => {                    
-                   app.asociados = response.data;
+            axios.get(url).then(response => {
+                app.asociados = response.data;
             });
         },
-        cargar(id){
+        cargar(id) {
             this.id_asociado = id;
-            let url = 'controller/search.php?mostrandoAsociado='+id;
-            axios.get(url).then(response => {                    
-                   app.asociado = response.data;
-                   app.nombre =   app.asociado[0].nombre;
-                   app.id_socio = app.asociado[0].id;
-                   app.derecho =  app.asociado[0].derecho;
+            let url = 'controller/search.php?mostrandoAsociado=' + id;
+            axios.get(url).then(response => {
+                app.asociado = response.data;
+                app.nombre = app.asociado[0].nombre;
+                app.id_socio = app.asociado[0].id;
+                app.derecho = app.asociado[0].derecho;
             });
             this.foto = '';
         },
-        cerrarModal(){
+        cerrarModal() {
             console.log("cerrando")
             this.id_asociado = 0;
             this.foto = '';
         },
-        siguiente(id){
+        siguiente(id) {
             var image2 = document.getElementById('image').files[0];
-           
+
             $("#exampleModal").modal('hide');
             let url = 'controller/foto.php';
-           // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-            axios.post(url,{
-                foto : image2,
-                numero : app.numero,
-                id : id
-            }).then(response => {                    
-              console.log(response.data)
+            // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+            axios.post(url, {
+                foto: image2,
+                id: id
+            }).then(response => {
+                console.log(response.data)
             });
         },
-        getImage(e){
-            
+        getImage(e) {
+
             let image = e.target.files[0];
             let reader = new FileReader();
             reader.readAsDataURL(image);
@@ -66,16 +64,16 @@ var app = new Vue({
     },
     mounted() {
 
-      
-       // this.getAsociados();
-        setInterval(function(){
-            console.log("listo")
-           app.getAsociados();
-        },500);
 
-        setTimeout(function(){
+        // this.getAsociados();
+        setInterval(function() {
+            console.log("listo")
+            app.getAsociados();
+        }, 500);
+
+        setTimeout(function() {
             $('#example').DataTable();
-        },2000);
+        }, 2000);
     },
 
 

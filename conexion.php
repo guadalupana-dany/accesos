@@ -1,7 +1,7 @@
 <?php
 
 $databaseHost = 'localhost';
-$databaseName = 'controlacceso';
+$databaseName = 'controlaccesos';
 $databaseUsername = 'root';
 $databasePassword = '';
 

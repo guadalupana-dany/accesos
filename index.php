@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" >
     <title>Control de Acceso</title>
     
 </head>
@@ -59,6 +59,7 @@
                                                     <th scope="col">Cif</th>
                                                     <th scope="col">Nombre</th>
                                                     <th scope="col">Agencia</th>
+                                                    <th>Derecho</th>
                                                     <th scope="col">Next</th>
                                                 </tr>
                                             </thead>
@@ -67,6 +68,17 @@
                                                     <td v-text="co.cif"></td>
                                                     <td v-text="co.nombre"></td>
                                                     <td v-text="co.areaFinanciera"></td>
+                                                    <td>
+                                                            <template v-if="co.id_estado_derecho == 1">
+                                                                <span class="badge badge-pill badge-success">DERECHO</span>
+                                                            </template>
+                                                            <template v-else-if="co.id_estado_derecho == 2">
+                                                                <span class="badge badge-pill badge-danger">NO DERECHO</span> 
+                                                            </template>
+                                                            <template v-else>
+                                                                <span class="badge badge-pill badge-danger">NADA</span>
+                                                            </template>
+                                                    </td>
                                                     <td>
                                                     <template v-if='co.id_estado_derecho == 3'>
                                                         <span class="badge badge-danger">NO PUEDE INGRESAR</span>
