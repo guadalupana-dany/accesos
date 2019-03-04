@@ -1,9 +1,15 @@
+/**
+ * Desarrollado por Dany Diaz
+ * Desarrollador Web
+ */
 var app = new Vue({
 
     el: '#app',
     data: {
+        //datos del asociado
         asociados: [],
 
+        //id del asociado
         id_asociado: 0,
 
         //datos del asociado
@@ -15,6 +21,7 @@ var app = new Vue({
     },
 
     methods: {
+        //muestra los asociados en el estado para tomarse la foto
         getAsociados() {
             let url = 'controller/search.php?mostrando=listo';
             axios.get(url).then(response => {

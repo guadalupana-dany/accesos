@@ -73,6 +73,14 @@
 
 </div>
 </body>
+<!--
+    /**
+ * Desarrollado por Dany Diaz
+ * Desarrollador Web
+ */
+ Importamos las lib que necesitamos
+
+    -->
 <script src="assets/js/jquery-3.3.1.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.dataTables.min.js"></script>
