@@ -58,7 +58,8 @@ if ($uploadOk == 0) {
             $insert = "insert into opinion (id_asociado) values (".$id.")";
             mysqli_query($mysqli,$insert);
         }*/
-        header('Location: http://10.60.81.32:81/accesos1/accesos/fotografia.php');
+        header('Location: http://10.60.81.213/accesos/fotografia.php');
+       // header('Location: http://192.168.10.102:81/accesos1/accesos/fotografia.php');
     } else {
         echo "ERROR FALTAL.";
     }

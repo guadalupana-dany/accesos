@@ -47,6 +47,25 @@ var app = new Vue({
 
             });
         },
+        imprimir() {
+            var opcion = confirm("SEGURO QUE QUIERES IMPRIMIR");
+
+            if (opcion) {
+                let me = this;
+                let url = 'controller/search.php?firma=0';
+                me.firma = [];
+                axios.get(url).then(response => {
+                    me.firma = response.data;
+                    let url2 = "controller/firmas.php";
+                    axios.post(url2, { firmas: me.firma })
+                        .then(response1 => {
+                            me.contador++;
+                            window.open('http://10.60.81.213/pdf_firmas/print.php?count=' + me.contador, '_blank');
+                            me.firma = [];
+                        });
+                });
+            }
+        },
         /**
          * METODO QUE VERIFICA LAS 16 FIRMAS SI AL COMPLETARSE LAS 16 ABRE UN PDF CON LAS FIRMAS ASIGNADAS
          */
@@ -58,19 +77,21 @@ var app = new Vue({
 
                 me.firma = response.data;
 
+
                 //if que valida 16 asociados a la tabla firmas para poderlas imprimir
                 if (me.firma.length == 16) {
-
-                    //manda los 20 usuarios a imprimir  UPDATE `firma` SET `estado`=0
+                    console.log("si trae mas")
+                        //manda los 20 usuarios a imprimir  UPDATE `firma` SET `estado`=0
 
                     let url2 = "controller/firmas.php";
                     axios.post(url2, { firmas: me.firma })
                         .then(response1 => {
-                            //la variable contador sirve para el correlativo de las hojas de cada 16 firmas
+                            console.log("LISTO")
+                                //la variable contador sirve para el correlativo de las hojas de cada 16 firmas
                             me.contador++;
                             //abre una ventana nueva apuntando al otro proyecto de firmas en la cual manda el contador de la pagina
-                            window.open('http://10.60.81.213/pdf_firmas/print.php?count=' + me.contador, '_blank');
-
+                            // window.open('http://10.60.81.213/pdf_firmas/print.php?count=' + me.contador, '_blank');
+                            window.open('http://192.168.10.102:81/pdf_firmas/print.php?count=' + me.contador, '_blank');
                             //   window.open('http://10.60.81.32:81/pdf_firmas/print.php?count=' + me.contador, '_blank');
                             //LEVANTO LA URL DE BIENVENIDA
                             me.firma = [];
@@ -88,17 +109,16 @@ var app = new Vue({
         this.getAsociados();
         let me = this;
 
+
         //sirve para estar ejecutandoce a cada 1 seg. que verifica las 16 firmas y va obteniendo los asociados casi en tiempo real
         setInterval(function() {
             me.verificarFirmas();
             me.getAsociados();
             $('#example1').DataTable();
+
         }, 1000);
 
 
-        setTimeout(function() {
-            $('#example1').DataTable();
-        }, 2000);
     },
 
 

@@ -20,24 +20,29 @@
                             <div class="card border-primary mb-3" style="max-width: 18rem;">
                                 <div class="card-header"><center>Buscar Asociado</center></div>
                                 <div class="card-body text-primary">
-                                    <div class="form-group">
+                                   <!-- <div class="form-group">
                                         <label for="exampleFormControlSelect1">Buscar por</label>
                                         <select class="form-control" id="exampleFormControlSelect1" v-model="buscarpor">
                                             <option value="1">CIF</option>
                                             <option value="2">NOMBRE</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" v-if="buscarpor == 1">
+                                    <div class="form-group" v-if="buscarpor == 1">-->
                                         <label for="exampleFormControlInput1">CIF:</label>
                                         <input type="number" class="form-control" id="exampleFormControlInput1"  @keyup.enter="buscar" v-model="cif" placeholder="CIF">
-                                    </div>
-                                    <div class="form-group" v-if="buscarpor == 2">
+                                  <!--  </div>
+                                    <div class="form-group" v-if="buscarpor == 2"> -->
+                                        <label for="exampleFormControlInput">DPI:</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput" @keyup.enter="buscar" v-model="dpi" placeholder="DPI">
+                                  <!--  </div>     -->
+                                  
                                         <label for="exampleFormControlInput">NOMBRE:</label>
                                         <input type="text" class="form-control" id="exampleFormControlInput" @keyup.enter="buscar" v-model="nombre" placeholder="NOMBRE">
-                                    </div>
+                                    <br>
                                     <div v-if="messageBuscar.length">
                                         <p style="color:red" v-text="messageBuscar"></p>
                                     </div>
+                                    
                                     <button type="button" class="btn btn-primary" @click="buscar" >Buscar</button>
                                 </div>
                             </div>

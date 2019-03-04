@@ -19,10 +19,23 @@
          exit;
     }
 
-    //BUSCAR POPR NOMBRE
+    //BUSCAR POR NOMBRE
     if(isset($_GET['nombre'])){
         $nombre = $_GET['nombre'];
         $test = "select id,cif,nombre,areaFinanciera,id_estado_derecho,entro from asociado where nombre like '%" . $nombre ."%'";      
+        $query = mysqli_query($mysqli,$test);
+        
+        $response = array();
+        while($row = mysqli_fetch_assoc($query)){
+            $response[] = $row;
+         }         
+         echo json_encode($response);
+         exit;
+    }
+     //BUSCAR POR DPI
+     if(isset($_GET['dpi'])){
+        $dpi = $_GET['dpi'];
+        $test = "select id,cif,nombre,areaFinanciera,id_estado_derecho,entro from asociado where dpi like '%" . $dpi ."%'";      
         $query = mysqli_query($mysqli,$test);
         
         $response = array();
@@ -75,7 +88,7 @@
         $nombre = $_GET['nombreInfo'];
         $test = "SELECT a.id,a.cif,a.nombre,a.areaFinanciera,ed.nombre as derecho,ei.nombre motivo 
          FROM asociado as a inner join estado_derecho as ed on ed.id = a.id_estado_derecho 
-         inner join estado_ingreso as ei on ei.id = a.id_estado_ingreso where nombre like '%" . $nombre ."%'";      
+         inner join estado_ingreso as ei on ei.id = a.id_estado_ingreso where a.nombre like '%" . $nombre ."%'";      
         $query = mysqli_query($mysqli,$test);
         
         $response = array();
@@ -86,6 +99,21 @@
          exit;
     }
 
+      //BUSCAR POPR CIF
+      if(isset($_GET['dpiInfo'])){
+        $dpiInfo = $_GET['dpiInfo'];
+        $test = "SELECT a.id,a.cif,a.nombre,a.areaFinanciera,ed.nombre as derecho,ei.nombre motivo 
+         FROM asociado as a inner join estado_derecho as ed on ed.id = a.id_estado_derecho 
+         inner join estado_ingreso as ei on ei.id = a.id_estado_ingreso where a.dpi like '%" . $dpiInfo ."%'";      
+        $query = mysqli_query($mysqli,$test);
+        
+        $response = array();
+        while($row = mysqli_fetch_assoc($query)){
+            $response[] = $row;
+         }         
+         echo json_encode($response);
+         exit;
+    }
     //muesttra los datos para el modulo de fotografias
     if(isset($_GET['mostrando'])){
         

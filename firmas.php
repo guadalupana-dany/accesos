@@ -15,6 +15,8 @@
         <img src="assets/img/micoope1.png" class="img-responsive" style="width: 50%;height: 200px;"> 
         </center>
         <div class="container">
+        <button class="btn btn-dark" @click="imprimir">Print</button>
+        <br><br>
                     <table id="example1" class="table table-bordered table-striped" style="width:100%">
                             <thead>
                                 <tr>

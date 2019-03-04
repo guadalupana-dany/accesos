@@ -73,14 +73,16 @@ var app = new Vue({
 
 
         // this.getAsociados();
-        setInterval(function() {
-            console.log("listo")
-            app.getAsociados();
-        }, 500);
 
+        setInterval(function() {
+            app.getAsociados();
+
+        }, 500);
         setTimeout(function() {
             $('#example').DataTable();
         }, 2000);
+
+
     },
 
 

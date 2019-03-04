@@ -4,8 +4,9 @@ var app = new Vue({
     data: {
         asociado: [],
         cif: '',
+        dpi: '',
         nombre: '',
-        buscarpor: 1,
+        //  buscarpor: 1,
         messageBuscar: '',
         alertnoasociado: 0,
         derecho: '',
@@ -15,27 +16,33 @@ var app = new Vue({
         buscar() {
             this.alertnoasociado = 0;
             let url = 'controller/search.php?';
-            //buscar por cif
-            if (this.buscarpor == 1) {
-                if (!this.cif.length) {
-                    this.messageBuscar = 'DEBE DE INGRESAR NUMERO DE CIF';
-                    return;
+            if (!this.cif.length) {
+
+                if (!this.dpi.length) {
+
+                    if (!this.nombre.length) {
+                        this.messageBuscar = 'DEBE DE LLENAR UN CAMPO REQUERIDO';
+                        return;
+                    } else {
+                        url += 'nombre=' + this.nombre.toLowerCase();
+                    }
+
+                } else {
+                    url += 'dpi=' + this.dpi;
                 }
+                //       }
+
+            } else {
                 url += 'cif=' + this.cif;
             }
-            //buscara por nombre
-            if (this.buscarpor == 2) {
-                if (!this.nombre.length) {
-                    this.messageBuscar = 'DEBE DE INGRESAR NOMBRE';
-                    return;
-                }
-                url += 'nombre=' + this.nombre.toLowerCase();
-            }
+
+            //    }
             //limpia los datos
             this.messageBuscar = '';
-            this.buscarpor = 1;
+            //    this.buscarpor = 1;
             this.nombre = '';
             this.cif = '';
+            this.dpi = '';
 
             axios.get(url).then(response => {
                 app.asociado = response.data;
